@@ -14,8 +14,9 @@ activate(context: vscode.ExtensionContext) {
         let editor = await openFile(await createFile(dirName, userFilePath));
         // Insert snippet only if the user did not provide a template file and
         // a new post file had to be created
+        const snippetStr = postSnippet.replace('YYYY', getDateTime());
+        
         if (shouldInsertFrontMatter()) {
-          const snippetStr = postSnippet.replace('YYYY', getDateTime());
           editor.insertSnippet(new vscode.SnippetString(snippetStr));
           setFrontMatter(false);
         }
